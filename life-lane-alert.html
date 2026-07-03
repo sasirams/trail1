@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Lane Alert | See the Siren. Save the Seconds. Save Lives.</title>
+  <meta name="description" content="Life Lane Alert is a startup idea focused on helping drivers clear the way earlier for emergency and roadside vehicles in dense urban traffic." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --color-bg: #f7f6f2;
+      --color-surface: #fdfcf9;
+      --color-surface-2: #f1efe9;
+      --color-border: rgba(40, 37, 29, 0.12);
+      --color-text: #28251d;
+      --color-text-muted: #66645d;
+      --color-primary: #0b7a75;
+      --color-primary-hover: #075d59;
+      --color-accent: #d88a17;
+      --color-white: #ffffff;
+      --shadow-sm: 0 10px 30px rgba(21, 32, 30, 0.07);
+      --shadow-md: 0 18px 50px rgba(21, 32, 30, 0.12);
+      --radius-sm: 14px;
+      --radius-md: 22px;
+      --radius-lg: 32px;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --content: 1120px;
+      --text-sm: clamp(0.875rem, 0.84rem + 0.2vw, 1rem);
+      --text-base: clamp(1rem, 0.97rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.8vw, 1.5rem);
+      --text-xl: clamp(2rem, 1.4rem + 2vw, 3.4rem);
+      --text-hero: clamp(2.8rem, 1.4rem + 4vw, 5.4rem);
+      --font-body: 'Manrope', sans-serif;
+      --font-display: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(11,122,117,0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(216,138,23,0.08), transparent 28%),
+        var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    button { font: inherit; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--content));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 1rem;
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+    }
+    .skip-link:focus { left: 1rem; z-index: 999; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(247, 246, 242, 0.82);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--color-primary), #42a8a0);
+      display: grid;
+      place-items: center;
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: 180ms ease;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.68);
+      border-color: var(--color-border);
+    }
+
+    .hero {
+      padding: clamp(3.5rem, 7vw, 6rem) 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(11,122,117,0.09);
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    h1 {
+      font-size: var(--text-hero);
+      max-width: 11ch;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero p {
+      max-width: 60ch;
+      color: var(--color-text-muted);
+      margin: 0 0 1.6rem;
+      font-size: var(--text-lg);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-note {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .city-visual {
+      aspect-ratio: 4 / 4.5;
+      border-radius: 26px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, #dff3f0 0%, #f9f7f1 100%);
+      position: relative;
+      border: 1px solid rgba(40,37,29,0.08);
+    }
+
+    .road {
+      position: absolute;
+      left: 14%; right: 14%; bottom: 0;
+      height: 76%;
+      background: linear-gradient(180deg, #474943, #2d2f2b);
+      clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
+    }
+
+    .lane {
+      position: absolute;
+      left: 50%; top: 12%; bottom: 8%;
+      width: 6px;
+      transform: translateX(-50%);
+      background: repeating-linear-gradient(to bottom, #ffd36d 0 24px, transparent 24px 46px);
+      opacity: 0.9;
+    }
+
+    .car, .ambulance {
+      position: absolute;
+      width: 20%;
+      border-radius: 18px;
+      padding: 0.8rem 0.4rem;
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.72rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .car {
+      background: var(--color-white);
+      color: var(--color-text-muted);
+    }
+
+    .ambulance {
+      background: #fff2df;
+      color: #9d5800;
+      border: 1px solid rgba(216,138,23,0.2);
+    }
+
+    .car.one { left: 18%; bottom: 18%; }
+    .car.two { right: 18%; bottom: 27%; }
+    .car.three { left: 27%; bottom: 45%; }
+    .ambulance.main { right: 26%; bottom: 12%; }
+
+    .signal {
+      position: absolute;
+      inset: auto 18% 30% auto;
+      width: 82px; height: 82px;
+      border-radius: 50%;
+      border: 2px solid rgba(11,122,117,0.22);
+      box-shadow: 0 0 0 16px rgba(11,122,117,0.08), 0 0 0 32px rgba(11,122,117,0.04);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .stat {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      font-family: var(--font-display);
+      margin-bottom: 0.25rem;
+    }
+
+    section {
+      padding: clamp(3rem, 6vw, 5rem) 0;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      max-width: 56rem;
+    }
+
+    .section-head p { color: var(--color-text-muted); margin: 0; }
+    h2 { font-size: var(--text-xl); }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .icon {
+      width: 3rem;
+      height: 3rem;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(11,122,117,0.09);
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+
+    .card p, .use-list, .quote, .footer-copy { color: var(--color-text-muted); }
+
+    .scenario-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .scenario-visual {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(180deg, #dff0ff 0%, #fbf8f2 100%);
+      border-bottom: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+
+    .scenario-copy {
+      padding: 1.35rem;
+    }
+
+    .street {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 12%;
+      height: 30%;
+      background: #353733;
+      border-radius: 24px;
+    }
+
+    .street::before {
+      content: '';
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 50%;
+      height: 4px;
+      transform: translateY(-50%);
+      background: repeating-linear-gradient(to right, #ffd36d 0 26px, transparent 26px 48px);
+    }
+
+    .building {
+      position: absolute;
+      bottom: 42%;
+      width: 16%;
+      border-radius: 16px 16px 0 0;
+      background: #fffdf8;
+      border: 1px solid rgba(40,37,29,0.08);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .building::before {
+      content: '';
+      position: absolute;
+      inset: 14% 18%;
+      background: repeating-linear-gradient(to bottom, rgba(11,122,117,0.12) 0 10px, transparent 10px 18px), repeating-linear-gradient(to right, rgba(11,122,117,0.12) 0 10px, transparent 10px 18px);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .building.b1 { left: 10%; height: 34%; }
+    .building.b2 { left: 29%; height: 48%; }
+    .building.b3 { right: 28%; height: 38%; }
+    .building.b4 { right: 10%; height: 54%; }
+
+    .vehicle {
+      position: absolute;
+      bottom: 18%;
+      width: 18%;
+      height: 16%;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .vehicle.driver {
+      background: var(--color-white);
+      color: var(--color-text-muted);
+      border: 1px solid rgba(40,37,29,0.08);
+    }
+
+    .vehicle.responder {
+      background: #fff1df;
+      color: #9d5800;
+      border: 1px solid rgba(216,138,23,0.24);
+    }
+
+    .vehicle.police {
+      background: #e7f6f5;
+      color: var(--color-primary);
+      border: 1px solid rgba(11,122,117,0.18);
+    }
+
+    .moving .vehicle.driver.left { left: 14%; }
+    .moving .vehicle.driver.center { left: 38%; }
+    .moving .vehicle.responder { right: 14%; }
+    .moving .alert-wave {
+      position: absolute;
+      right: 18%;
+      bottom: 36%;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid rgba(216,138,23,0.25);
+      box-shadow: 0 0 0 14px rgba(216,138,23,0.10), 0 0 0 28px rgba(216,138,23,0.05);
+    }
+
+    .roadside .vehicle.police { left: 18%; }
+    .roadside .vehicle.driver { right: 16%; }
+    .roadside .shoulder {
+      position: absolute;
+      left: 8%;
+      width: 18%;
+      bottom: 12%;
+      height: 30%;
+      background: rgba(255,255,255,0.22);
+      border-right: 2px dashed rgba(255,255,255,0.5);
+      border-radius: 24px 0 0 24px;
+    }
+
+    .roadside .cones span {
+      position: absolute;
+      bottom: 28%;
+      width: 0;
+      height: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 18px solid var(--color-accent);
+    }
+
+    .roadside .cones span:nth-child(1) { left: 39%; }
+    .roadside .cones span:nth-child(2) { left: 46%; }
+    .roadside .cones span:nth-child(3) { left: 53%; }
+
+    .roadside .flash {
+      position: absolute;
+      left: 24%;
+      bottom: 36%;
+      width: 70px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(11,122,117,0.20), rgba(216,138,23,0.18));
+      box-shadow: 0 0 0 10px rgba(11,122,117,0.08);
+    }
+
+    .impact {
+      background: linear-gradient(180deg, rgba(11,122,117,0.05), rgba(216,138,23,0.06));
+      border-block: 1px solid var(--color-border);
+    }
+
+    .impact-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    .quote {
+      font-size: var(--text-lg);
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+    }
+
+    .use-list {
+      display: grid;
+      gap: 1rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .use-list li {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 1rem 1.1rem;
+    }
+
+    .cta-panel {
+      background: var(--color-primary);
+      color: var(--color-white);
+      border-radius: 34px;
+      padding: clamp(1.6rem, 4vw, 3rem);
+      display: grid;
+      gap: 1rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .cta-panel p { margin: 0; color: rgba(255,255,255,0.82); max-width: 48rem; }
+    .cta-panel .btn-primary { background: var(--color-white); color: var(--color-primary); }
+    .cta-panel .btn-secondary { background: transparent; border-color: rgba(255,255,255,0.24); color: var(--color-white); }
+
+    footer {
+      padding: 2rem 0 3rem;
+    }
+
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-3,
+      .scenario-grid,
+      .impact-panel,
+      .stats,
+      .footer-bar {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .nav-links { display: none; }
+      h1 { max-width: 14ch; }
+      .city-visual { max-width: 420px; margin: 0 auto; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 1.25rem), var(--content)); }
+      .site-header { position: static; }
+      .nav-bar { align-items: flex-start; }
+      .brand-name small { display: none; }
+      .hero { padding-top: 2rem; }
+      .cta-row { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="#top" aria-label="Life Lane Alert home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 16C7 16 8.5 8 12.5 8C15.3 8 15.9 13 20 13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M4 11H8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M16 18H20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">Life Lane Alert</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#problem">Why it matters</a>
+        <a href="#who">Who it serves</a>
+        <a href="#future">Vision</a>
+        <a href="#contact" class="btn btn-primary">Talk about a pilot</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Urban emergency mobility</div>
+          <h1>See the siren earlier. Clear the way sooner.</h1>
+          <p>Life Lane Alert is a startup idea focused on helping drivers make space sooner for approaching emergency and roadside vehicles in dense city traffic, where every second matters and every lane is harder to open.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact">Request a conversation</a>
+            <a class="btn btn-secondary" href="#problem">Explore the idea</a>
+          </div>
+          <div class="hero-note">Tagline: See the Siren. Save the Seconds. Save Lives.</div>
+        </div>
+
+        <aside class="hero-card" aria-label="Illustration of city traffic clearing for emergency response">
+          <div class="city-visual">
+            <div class="road"></div>
+            <div class="lane"></div>
+            <div class="car one">Driver</div>
+            <div class="car two">Driver</div>
+            <div class="car three">Driver</div>
+            <div class="ambulance main">Responder</div>
+            <div class="signal"></div>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong>Earlier</strong>
+              <span>Awareness before the siren is visible at the windshield.</span>
+            </div>
+            <div class="stat">
+              <strong>Safer</strong>
+              <span>More time for calm lane changes and better driver decisions.</span>
+            </div>
+            <div class="stat">
+              <strong>Smarter</strong>
+              <span>Built around the future of connected roads and public safety.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="problem">
+      <div class="container">
+        <div class="section-head">
+          <h2>Busy streets leave little room to react</h2>
+          <p>In dense urban corridors, drivers often hear or spot emergency vehicles only when traffic is already tight. Life Lane Alert is centered on the simple idea that earlier awareness can help people move with less panic, less confusion, and less delay.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3L20 7V17L12 21L4 17V7L12 3Z" stroke="currentColor" stroke-width="2"/><path d="M12 8V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>
+            </div>
+            <h3>Less last-second braking</h3>
+            <p>Drivers need time to notice, think, and act. A clearer heads-up can reduce chaotic reactions at intersections and in stop-and-go traffic.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 8L5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>More room to make space</h3>
+            <p>In packed downtown lanes, even a few extra moments can help drivers shift position and open a path with more confidence.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 16L10 10L14 14L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8H20V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Stronger city resilience</h3>
+            <p>Clear Lane is positioned around a future where emergency response, traffic movement, and digital awareness work together more smoothly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="situations">
+      <div class="container">
+        <div class="section-head">
+          <h2>Visual situations this idea speaks to</h2>
+          <p>These examples show the kinds of roadway moments Life Lane Alert is designed to support, from a responder moving through city traffic to a police unit working on the roadside while drivers approach.</p>
+        </div>
+        <div class="scenario-grid">
+          <article class="card scenario-card">
+            <div class="scenario-visual moving" aria-hidden="true">
+              <div class="building b1"></div>
+              <div class="building b2"></div>
+              <div class="building b3"></div>
+              <div class="building b4"></div>
+              <div class="street"></div>
+              <div class="vehicle driver left">Driver</div>
+              <div class="vehicle driver center">Driver</div>
+              <div class="vehicle responder">EMS</div>
+              <div class="alert-wave"></div>
+            </div>
+            <div class="scenario-copy">
+              <h3>Moving responder</h3>
+              <p>A city traffic situation where an emergency vehicle is still on the move and drivers need earlier awareness to open space before the responder reaches the bottleneck.</p>
+            </div>
+          </article>
+
+          <article class="card scenario-card">
+            <div class="scenario-visual roadside" aria-hidden="true">
+              <div class="building b1"></div>
+              <div class="building b2"></div>
+              <div class="building b3"></div>
+              <div class="building b4"></div>
+              <div class="street"></div>
+              <div class="shoulder"></div>
+              <div class="vehicle police">Police</div>
+              <div class="vehicle driver">Driver</div>
+              <div class="cones"><span></span><span></span><span></span></div>
+              <div class="flash"></div>
+            </div>
+            <div class="scenario-copy">
+              <h3>Roadside police responding</h3>
+              <p>A roadside response scene where drivers approaching an active police stop or incident area need clearer notice to slow down, shift over, and pass more safely.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="impact" id="who">
+      <div class="container impact-panel">
+        <div class="section-head">
+          <h2>Built for the people moving through risk</h2>
+          <p>Life Lane Alert is not only about one vehicle. It is about making streets more responsive for the people who protect, recover, and keep cities moving every day.</p>
+          <ul class="use-list">
+            <li><strong>Emergency responders:</strong> Better roadway cooperation when minutes are critical.</li>
+            <li><strong>Towing and recovery teams:</strong> Safer roadside work in active traffic environments.</li>
+            <li><strong>Hazardous goods operators:</strong> More informed movement around high-risk transport situations.</li>
+          </ul>
+        </div>
+        <div class="quote">
+          “The goal is simple: give drivers enough awareness to do the right thing sooner, especially where traffic density makes every maneuver harder.”
+        </div>
+      </div>
+    </section>
+
+    <section id="future">
+      <div class="container">
+        <div class="section-head">
+          <h2>A public-safety idea with room to grow</h2>
+          <p>This landing page presents Life Lane Alert as an early-stage concept for safer emergency mobility. The long-term vision can support conversations with municipalities, fleet partners, incubators, and public-safety stakeholders who care about faster and safer movement through congested streets.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Simple message</h3>
+            <p>The website keeps the story easy to understand by focusing on the human benefit instead of technical detail.</p>
+          </article>
+          <article class="card">
+            <h3>Optimistic tone</h3>
+            <p>The design stays bright, calm, and civic-minded so the idea feels approachable for partners and communities.</p>
+          </article>
+          <article class="card">
+            <h3>Startup-ready</h3>
+            <p>You can use this as a first public page while you refine pilots, partnerships, branding, and product direction.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta-panel">
+          <h2>Start the conversation around Life Lane Alert</h2>
+          <p>Use this page to introduce the concept, share the mission, and invite early interest from public-safety leaders, mobility partners, and community stakeholders.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="mailto:hello@clearlane.ca">Email the founder</a>
+            <a class="btn btn-secondary" href="#top">Back to top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-bar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 16C7 16 8.5 8 12.5 8C15.3 8 15.9 13 20 13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M4 11H8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M16 18H20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">Life Lane Alert</span>
+      </div>
+      <div class="footer-copy">Concept landing page for the Life Lane Alert emergency mobility startup idea.</div>
+    </div>
+  </footer>
+</body>
+</html>
